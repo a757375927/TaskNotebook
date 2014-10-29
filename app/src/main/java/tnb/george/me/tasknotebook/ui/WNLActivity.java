@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import tnb.george.me.tasknotebook.R;
 
-public class MyActivity2 extends Activity {
+public class WNLActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

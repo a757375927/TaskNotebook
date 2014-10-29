@@ -7,6 +7,13 @@ import java.util.Date;
  */
 public class Task {
 
+    public Task(String name,String taskInfo,Date createDate,Date taskDate){
+        this.setName(name);
+        this.setTaskInfo(taskInfo);
+        this.setCreateDate(createDate);
+        this.setTaskDate(taskDate);
+    }
+
     private int id;
     private String name;
     private Date createDate;

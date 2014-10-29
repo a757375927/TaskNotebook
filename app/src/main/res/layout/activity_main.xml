@@ -9,11 +9,9 @@
     tools:context=".MyActivity">
 
     <RelativeLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/txtlay"
+        android:id="@+id/txtlay1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:context=".MyActivity">
+        android:layout_height="wrap_content">
         <TextView
             android:text="@string/title"
             android:id="@+id/title"
@@ -45,29 +43,87 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/taskInfoTxt"
             android:layout_below="@id/dateTimeTxt"
             android:layout_toRightOf="@id/taskInfo"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
-            android:id="@+id/taskInfoTxt"
             android:layout_width="150dp"
             android:layout_height="30dp" />
-        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/timein"
+            android:layout_below="@id/taskInfo"
+            android:layout_marginTop="20dp"
+            android:text="@string/timein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/timeinTxt"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:layout_below="@id/taskInfoTxt"
+            android:layout_toRightOf="@id/timein"
+            android:layout_alignLeft="@id/taskInfoTxt"
+            />
+
+        <TextView
+            android:id="@+id/datetimein"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/timein"
+            android:text="@string/datetimein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/dateinTxt"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:layout_below="@id/timeinTxt"
+            android:layout_toRightOf="@id/datetimein"
+            android:layout_marginTop="20dp"
+
+            />
+    </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/commitBtn"
-        android:text="@string/commit"
-        android:layout_below="@id/txtlay"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        />
 
-    <Button
-        android:text="@string/clear"
-        android:layout_below="@id/txtlay"
-        android:layout_toRightOf="@id/commitBtn"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        />
+    <RelativeLayout
+        android:id="@+id/txtlay2"
+        android:layout_below="@id/txtlay1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     >
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/txtlay2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <Button
+            android:id="@+id/commitBtn"
+            android:text="@string/commit"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            />
+        <Button
+            android:id="@+id/toWNLBtn"
+            android:text="@string/toWNL"
+            android:layout_toRightOf="@id/commitBtn"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            />
+        <Button
+            android:text="@string/clear"
+            android:layout_toRightOf="@id/toWNLBtn"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            />
+    </RelativeLayout>
+
 </RelativeLayout>

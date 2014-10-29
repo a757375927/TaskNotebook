@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MyActivity2"
+            android:name=".ui.WNLActivity"
             android:label="@string/title_activity_my_activity2" >
         </activity>
     </application>

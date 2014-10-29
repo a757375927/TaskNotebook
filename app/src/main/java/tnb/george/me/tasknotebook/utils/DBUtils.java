@@ -14,16 +14,16 @@ import android.database.sqlite.SQLiteOpenHelper;
  * @Since:2014/10/29<br/>
  */
 public class DBUtils extends SQLiteOpenHelper{
-    private static final StringUtils DB_NAME = "TASKNOTEBOOK.db";
-    private static final StringUtils TBL_NAME = "CollTbl";
-    private static final StringUtils CREATE_TBL = "create table TaskNote("+
+    private static final String DB_NAME = "TASKNOTEBOOK.db";
+    private static final String TBL_NAME = "CollTbl";
+    private static final String CREATE_TBL = "create table TaskNote("+
             " id integer primary key autoincrement," +
             " taskInfo text," +
             " createTime integer," +
             " taskTime integer";
 
     private SQLiteDatabase db;
-    DBUtils(Context c){
+    public DBUtils(Context c){
         super(c,DB_NAME,null,2);
     }
 
@@ -47,7 +47,7 @@ public class DBUtils extends SQLiteOpenHelper{
     public void del(int id){
         if(db == null)
             db = getWritableDatabase();
-        db.delete(TBL_NAME,"_id=?",new StringUtils[]{StringUtils.valueOf(id)});
+        db.delete(TBL_NAME,"_id=?",new String[]{String.valueOf(id)});
     }
 
     public void close(){

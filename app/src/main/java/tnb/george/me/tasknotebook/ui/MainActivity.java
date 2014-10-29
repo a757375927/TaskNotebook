@@ -14,10 +14,17 @@ import java.util.Date;
 
 import tnb.george.me.tasknotebook.R;
 import tnb.george.me.tasknotebook.bean.Task;
+import tnb.george.me.tasknotebook.service.TaskService;
 import tnb.george.me.tasknotebook.utils.StringUtils;
 import tnb.george.me.tasknotebook.utils.UIUtils;
 
-
+/**
+ * Created by GeorgeZou on 2014/10/29.\
+ *
+ * @Description:<br/>
+ * @Author:GeorgeZou(Zousongqi0213@gmail.com)<br/>
+ * @Since:2014/10/29<br/>
+ */
 public class MainActivity extends BaseActivity {
 
     Button commitBtn;
@@ -28,6 +35,7 @@ public class MainActivity extends BaseActivity {
     EditText dateinTxt;
     EditText timeinTxt;
 
+    TaskService taskService = new TaskService(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +74,7 @@ public class MainActivity extends BaseActivity {
                 UIUtils.showToask0(getApplicationContext(),getString(R.string.dataTypeNotAvailable));
             }
             Task task = new Task("1",taskInfo,new Date(),dateNew);
-
+            taskService.save(task);
         }
     };
 
@@ -99,4 +107,7 @@ public class MainActivity extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

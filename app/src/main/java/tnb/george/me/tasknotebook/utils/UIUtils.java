@@ -3,6 +3,8 @@ package tnb.george.me.tasknotebook.utils;
 import android.content.Context;
 import android.widget.Toast;
 
+import tnb.george.me.tasknotebook.App;
+
 /**
  * Created by GeorgeZou on 2014/10/29.\
  *
@@ -12,7 +14,34 @@ import android.widget.Toast;
  */
 public class UIUtils {
 
-    public static void showToask0(Context c,String str){
-        Toast.makeText(c,str,Toast.LENGTH_SHORT).show();
+
+    Context mContext;
+
+    private UIUtils() {
     }
+
+    private static void show(Context context, int resId, int duration) {
+        Toast.makeText(context, resId, duration).show();
+    }
+
+    private static void show(Context context, String message, int duration) {
+        Toast.makeText(context, message, duration).show();
+    }
+
+    public static void showShort(int resId) {
+        Toast.makeText(App.getContext(), resId, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showShort(String message) {
+        Toast.makeText(App.getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void showLong(int resId) {
+        Toast.makeText(App.getContext(), resId, Toast.LENGTH_LONG).show();
+    }
+
+    public static void showLong(String message) {
+        Toast.makeText(App.getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
 }

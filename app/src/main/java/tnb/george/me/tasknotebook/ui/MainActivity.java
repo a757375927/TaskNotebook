@@ -66,19 +66,20 @@ public class MainActivity extends BaseActivity {
             String taskInfo = taskInfoTxt.getText().toString();
 
             if(StringUtils.isEmpty(datetime) || StringUtils.isEmpty(taskInfo)){
-                UIUtils.showToask0(getApplicationContext(),getString(R.string.infoNotComplete));
+                UIUtils.showLong(getString(R.string.infoNotComplete));
             }
             Date dateNew = null;
             try {
                 dateNew = StringUtils.stringToDate(datetime);
             }catch(ParseException ex){
-                UIUtils.showToask0(getApplicationContext(),getString(R.string.dataTypeNotAvailable));
+                UIUtils.showLong(getString(R.string.dataTypeNotAvailable));
             }
             Task task = new Task("1",taskInfo,new Date(),dateNew);
-            UIUtils.showToask0(getApplicationContext(),"准备添加内容:"+dateNew.toString()+" "+taskInfo);
+            UIUtils.showLong("准备添加内容:"+dateNew.toString()+" "+taskInfo);
             try {
                 taskService.save(task);
             }catch(Exception ex){
+                UIUtils.showLong("ERROR:"+ex.getMessage());
                 Log.i("TaskNotebook-->", "exception MainAct(88):"+ex.getMessage());
             }
         }

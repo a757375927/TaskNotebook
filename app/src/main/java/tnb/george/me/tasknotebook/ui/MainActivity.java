@@ -2,6 +2,7 @@ package tnb.george.me.tasknotebook.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -74,7 +75,12 @@ public class MainActivity extends BaseActivity {
                 UIUtils.showToask0(getApplicationContext(),getString(R.string.dataTypeNotAvailable));
             }
             Task task = new Task("1",taskInfo,new Date(),dateNew);
-            taskService.save(task);
+            UIUtils.showToask0(getApplicationContext(),"准备添加内容:"+dateNew.toString()+" "+taskInfo);
+            try {
+                taskService.save(task);
+            }catch(Exception ex){
+                Log.i("TaskNotebook-->", "exception MainAct(88):"+ex.getMessage());
+            }
         }
     };
 

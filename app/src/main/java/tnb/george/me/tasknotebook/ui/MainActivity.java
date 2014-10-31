@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.util.Date;
 
+import tnb.george.me.tasknotebook.App;
 import tnb.george.me.tasknotebook.R;
 import tnb.george.me.tasknotebook.bean.Task;
 import tnb.george.me.tasknotebook.service.TaskService;
@@ -65,6 +67,8 @@ public class MainActivity extends BaseActivity {
             String datetime = datetimeTxt.getText().toString();
             String taskInfo = taskInfoTxt.getText().toString();
 
+            Toast.makeText(MainActivity.this, "commit Listener ", Toast.LENGTH_LONG).show();
+
             if(StringUtils.isEmpty(datetime) || StringUtils.isEmpty(taskInfo)){
                 UIUtils.showLong(getString(R.string.infoNotComplete));
             }
@@ -74,6 +78,7 @@ public class MainActivity extends BaseActivity {
             }catch(ParseException ex){
                 UIUtils.showLong(getString(R.string.dataTypeNotAvailable));
             }
+            Toast.makeText(MainActivity.this, "commit Listener ", Toast.LENGTH_LONG).show();
             Task task = new Task("1",taskInfo,new Date(),dateNew);
             UIUtils.showLong("准备添加内容:"+dateNew.toString()+" "+taskInfo);
             try {

@@ -64,6 +64,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public void onClick(View view) {
+            Toast.makeText(MainActivity.this, "commit Listener ", Toast.LENGTH_LONG).show();
             String datetime = datetimeTxt.getText().toString();
             String taskInfo = taskInfoTxt.getText().toString();
 

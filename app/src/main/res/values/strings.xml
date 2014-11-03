@@ -4,7 +4,6 @@
     <string name="app_name">TaskNotebook</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
     <string name="title">记事本</string>
     <string name="datetime">日期:</string>
     <string name="taskInfo">任务:</string>
@@ -15,10 +14,10 @@
     <string name="toWNL">万年历</string>
     <string name="infoNotComplete">数据信息不完整</string>
     <string name="dataTypeNotAvailable">数据类型不匹配</string>
-
     <string name="title_activity_my_activity2">MyActivity2</string>
     <string name="title_activity_task_list">TaskListActivity</string>
     <string name="tasklistactivityTitle">任务列表</string>
     <string name="reallyWantToDelete">真的要删除该任务吗??</string>
+    <string name="title_activity_my">MyActivity</string>
 
 </resources>

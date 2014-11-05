@@ -44,4 +44,8 @@ public class UIUtils {
         Toast.makeText(App.getContext(), message, Toast.LENGTH_LONG).show();
     }
 
+    public static void showLong(Context context,String message) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+    }
+
 }

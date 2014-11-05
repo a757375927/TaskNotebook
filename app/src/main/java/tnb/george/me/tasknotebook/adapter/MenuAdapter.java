@@ -14,6 +14,7 @@ import java.util.List;
 import tnb.george.me.tasknotebook.R;
 import tnb.george.me.tasknotebook.bean.MenuCategory;
 import tnb.george.me.tasknotebook.bean.MenuItem;
+import tnb.george.me.tasknotebook.utils.UIUtils;
 
 /**
  * Created by GeorgeZou on 2014/11/4.\
@@ -72,27 +73,33 @@ public class MenuAdapter extends BaseAdapter{
         this.mActivePosition = mActivePosition;
     }
 
+
+
     @Override
     public int getCount() {
-        return 0;
+        return mItem.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return mItem.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
     @Override
+    public int getItemViewType(int position){ return getItem(position) instanceof MenuItem ? 0:1;}
+
+    @Override
+    public int getViewTypeCount(){return 2;}
+    @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+
         View v = view;
         Object item = getItem(i);
-        Log.i(LOG_TAG,"i.text:"+((MenuItem)item).mTitle);
-
 
         if(item instanceof MenuCategory){
             if(v == null){

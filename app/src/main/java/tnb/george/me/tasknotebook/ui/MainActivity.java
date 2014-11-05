@@ -45,28 +45,35 @@ public class MainActivity extends MenuDrawerActivity {
         super.onCreate(savedInstanceState);
 
         Log.i(LOG_TAG,"COME INTO onCreate function");
-        //菜单
-        bindView();
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //菜单
+        initView();
+    }
+
+    @Override
+    protected void onMenuItemClicked(int position, MenuItem item) {
+        UIUtils.showLong(this,"on click menu item:"+item.mTitle);
+    }
 
     /**
      * 绑定控件
      */
-    private void bindView (){
-
-/*
+    private void initView(){
+        menuDrawer.setContentView(R.layout.activity_main);
         commitBtn = (Button)findViewById(R.id.commitBtn);
         toWNLBtn = (Button)findViewById(R.id.toWNLBtn);
-
         datetimeTxt = (EditText)findViewById(R.id.dateTimeTxt);
         taskInfoTxt = (EditText)findViewById(R.id.taskInfoTxt);
         dateinTxt = (EditText)findViewById(R.id.dateinTxt);
         timeinTxt = (EditText)findViewById(R.id.timeinTxt);
         commitBtn.setOnClickListener(commitListener);
         toWNLBtn.setOnClickListener(toWNLListener);
-        Toast.makeText(MainActivity.this, "setOnClickListenerAfter", Toast.LENGTH_LONG).show();
-*/
+
     }
     /**
      * 提交按钮点击事件
@@ -79,7 +86,7 @@ public class MainActivity extends MenuDrawerActivity {
             String taskInfo = taskInfoTxt.getText().toString();
 
             if(StringUtils.isEmpty(datetime) || StringUtils.isEmpty(taskInfo)){
-                UIUtils.showLong(getString(R.string.infoNotComplete));
+                UIUtils.showLong(MainActivity.this,getString(R.string.infoNotComplete));
             }
 
             Toast.makeText(MainActivity.this, "datetime:"+datetime+" taskInfo:"+taskInfo, Toast.LENGTH_LONG).show();
@@ -88,16 +95,16 @@ public class MainActivity extends MenuDrawerActivity {
             try {
                 dateNew = StringUtils.stringToDate(datetime);
             }catch(ParseException ex){
-                UIUtils.showLong(getString(R.string.dataTypeNotAvailable));
+                UIUtils.showLong(MainActivity.this,getString(R.string.dataTypeNotAvailable));
             }
             Toast.makeText(MainActivity.this, "commit Listener ", Toast.LENGTH_LONG).show();
             Task task = new Task("1",taskInfo,new Date(),dateNew);
-            UIUtils.showLong("准备添加内容:"+dateNew.toString()+" "+taskInfo);
+            UIUtils.showLong(MainActivity.this,"准备添加内容:"+dateNew.toString()+" "+taskInfo);
 
             try {
                 taskService.save(task);
             }catch(Exception ex) {
-                UIUtils.showLong("ERROR:" + ex.getMessage());
+                UIUtils.showLong(MainActivity.this,"ERROR:" + ex.getMessage());
                 Log.i("TaskNotebook-->", "exception MainAct(88):" + ex.getMessage());
             }
         }

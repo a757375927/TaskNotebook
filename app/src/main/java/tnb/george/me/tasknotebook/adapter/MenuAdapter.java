@@ -93,6 +93,7 @@ public class MenuAdapter extends BaseAdapter{
         Object item = getItem(i);
         Log.i(LOG_TAG,"i.text:"+((MenuItem)item).mTitle);
 
+
         if(item instanceof MenuCategory){
             if(v == null){
                v = LayoutInflater.from(mContext).inflate(R.layout.menu_row_category,viewGroup,false);

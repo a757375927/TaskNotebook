@@ -2,26 +2,17 @@ package tnb.george.me.tasknotebook.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import net.simonvt.menudrawer.MenuDrawer;
-import net.simonvt.menudrawer.Position;
-
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import tnb.george.me.tasknotebook.R;
-import tnb.george.me.tasknotebook.adapter.MenuAdapter;
-import tnb.george.me.tasknotebook.bean.MenuCategory;
 import tnb.george.me.tasknotebook.bean.MenuItem;
 import tnb.george.me.tasknotebook.bean.Task;
 import tnb.george.me.tasknotebook.service.TaskService;
@@ -38,6 +29,7 @@ import tnb.george.me.tasknotebook.utils.UIUtils;
  */
 public class MainActivity extends MenuDrawerActivity {
 
+    private final String LOG_TAG = "MAINACTIVITY";
     Button commitBtn;
     Button toWNLBtn;
     EditText datetimeTxt;
@@ -51,6 +43,8 @@ public class MainActivity extends MenuDrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.i(LOG_TAG,"COME INTO onCreate function");
         //菜单
         bindView();
     }

@@ -2,6 +2,7 @@ package tnb.george.me.tasknotebook.adapter;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import tnb.george.me.tasknotebook.bean.MenuItem;
  * @Since:2014/11/4<br/>
  */
 public class MenuAdapter extends BaseAdapter{
+
+    String LOG_TAG = "BASEADAPTER";
 
     public interface MenuListener{
         void onActiveViewChange(View v);
@@ -88,6 +91,7 @@ public class MenuAdapter extends BaseAdapter{
     public View getView(int i, View view, ViewGroup viewGroup) {
         View v = view;
         Object item = getItem(i);
+        Log.i(LOG_TAG,"i.text:"+((MenuItem)item).mTitle);
 
         if(item instanceof MenuCategory){
             if(v == null){

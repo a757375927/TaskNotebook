@@ -25,6 +25,7 @@ import tnb.george.me.tasknotebook.bean.MenuCategory;
 import tnb.george.me.tasknotebook.bean.MenuItem;
 import tnb.george.me.tasknotebook.bean.Task;
 import tnb.george.me.tasknotebook.service.TaskService;
+import tnb.george.me.tasknotebook.ui.base.MenuDrawerActivity;
 import tnb.george.me.tasknotebook.utils.StringUtils;
 import tnb.george.me.tasknotebook.utils.UIUtils;
 
@@ -35,65 +36,32 @@ import tnb.george.me.tasknotebook.utils.UIUtils;
  * @Author:GeorgeZou(Zousongqi0213@gmail.com)<br/>
  * @Since:2014/10/29<br/>
  */
-public class MainActivity extends BaseActivity implements MenuAdapter.MenuListener{
+public class MainActivity extends MenuDrawerActivity {
 
     Button commitBtn;
     Button toWNLBtn;
-
     EditText datetimeTxt;
     EditText taskInfoTxt;
     EditText dateinTxt;
     EditText timeinTxt;
 
-    protected MenuAdapter menuAdapter;
-    protected ListView listView;
-    private int mActivePosition = 0;
-
-    private int width;
-
     TaskService taskService = new TaskService(this);
 
-    private MenuDrawer menuDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DisplayMetrics metric = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metric);
-        width = (int) (metric.widthPixels / 10 * 4.62); // 获取屏幕宽度（像素），并且侧滑菜单占6/10比例，接近黄金比例~
         //菜单
-        initMenuDrawer();
         bindView();
     }
 
-    private void initMenuDrawer(){
-        menuDrawer = MenuDrawer.attach(this, MenuDrawer.Type.BEHIND, Position.LEFT);
-        List<Object> items = new ArrayList<Object>();
-        items.add(new MenuItem("TestMenu1",R.drawable.icon_search_pressed));
-        items.add(new MenuItem("TestMenu1",R.drawable.ic_action_refresh_dark));
-        items.add(new MenuCategory("Cat 2"));
-        items.add(new MenuItem("设置",R.drawable.menu_icon_setting));
-        items.add(new MenuItem("关于",R.drawable.menu_about));
-        items.add(new MenuCategory(" "));
-        items.add(new MenuItem("退出",R.drawable.menu_exit));
-
-        listView = new ListView(this);
-        menuAdapter = new MenuAdapter(this,items);
-        menuAdapter.setMenuListener(this);
-        menuAdapter.setmActivePosition(mActivePosition);
-        listView.setAdapter(menuAdapter);
-        menuDrawer.setupUpIndicator(this);
-        menuDrawer.setDrawerIndicatorEnabled(true);
-        menuDrawer.setMenuView(listView);
-        menuDrawer.setMenuSize(width);
-
-    }
 
     /**
      * 绑定控件
      */
     private void bindView (){
 
+/*
         commitBtn = (Button)findViewById(R.id.commitBtn);
         toWNLBtn = (Button)findViewById(R.id.toWNLBtn);
 
@@ -104,7 +72,7 @@ public class MainActivity extends BaseActivity implements MenuAdapter.MenuListen
         commitBtn.setOnClickListener(commitListener);
         toWNLBtn.setOnClickListener(toWNLListener);
         Toast.makeText(MainActivity.this, "setOnClickListenerAfter", Toast.LENGTH_LONG).show();
-
+*/
     }
     /**
      * 提交按钮点击事件
@@ -159,8 +127,4 @@ public class MainActivity extends BaseActivity implements MenuAdapter.MenuListen
         return true;
     }
 
-    @Override
-    public void onActiveViewChange(View v) {
-
-    }
 }

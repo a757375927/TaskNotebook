@@ -4,14 +4,29 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CalendarView;
+import android.widget.DatePicker;
+
 import tnb.george.me.tasknotebook.R;
+import tnb.george.me.tasknotebook.utils.UIUtils;
 
 public class WNLActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_activity2);
+        setContentView(R.layout.activity_WNL);
+
+        CalendarView calendarView = (CalendarView)findViewById(R.id.wnl_mainCalendarView);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView calendarView, int year, int month, int dayOfMonth) {
+                String date = year + "-" + month +"-" + dayOfMonth;
+
+                UIUtils.showLong(WNLActivity.this,date);
+            }
+        });
     }
 
 

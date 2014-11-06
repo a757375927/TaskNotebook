@@ -55,4 +55,6 @@
         <item name="mdActiveIndicator">@drawable/menu_arrow_end</item>
         <item name="mdMenuSize">150dp</item>
     </style>
+    <!--  -->
+
 </resources>

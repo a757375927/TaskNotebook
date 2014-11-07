@@ -1,22 +1,20 @@
 package tnb.george.me.tasknotebook.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.CalendarView;
-import android.widget.DatePicker;
 
 import tnb.george.me.tasknotebook.R;
+import tnb.george.me.tasknotebook.ui.base.MenuDrawerActivity;
 import tnb.george.me.tasknotebook.utils.UIUtils;
 
-public class WNLActivity extends Activity {
+public class WNLActivity extends MenuDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_WNL);
+        setContentView(R.layout.activity_wnl);
 
         CalendarView calendarView = (CalendarView)findViewById(R.id.wnl_mainCalendarView);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -48,4 +46,12 @@ public class WNLActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
+    @Override
+    protected void onMenuItemClicked(int position, tnb.george.me.tasknotebook.bean.MenuItem item) {
+
+    }
+
 }

@@ -1,14 +1,19 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MyActivity">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".MyActivity"
+    android:background="@color/white" >
 
-    <RelativeLayout
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical" >
+      <include layout="@layout/mainbar" />
+  </LinearLayout>
+
+   <RelativeLayout
         android:id="@+id/txtlay1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -66,8 +71,7 @@
             android:inputType="time"
             android:layout_below="@id/taskInfoTxt"
             android:layout_toRightOf="@id/timein"
-            android:layout_alignLeft="@id/taskInfoTxt"
-            />
+            android:layout_alignLeft="@id/taskInfoTxt" />
 
         <TextView
             android:id="@+id/datetimein"
@@ -83,28 +87,13 @@
             android:inputType="date"
             android:layout_below="@id/timeinTxt"
             android:layout_toRightOf="@id/datetimein"
-            android:layout_marginTop="20dp"
-
-            />
-    </RelativeLayout>
-
-
-
-    <RelativeLayout
-        android:id="@+id/txtlay2"
-        android:layout_below="@id/txtlay1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-     >
-
+            android:layout_marginTop="20dp"/>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_below="@id/txtlay2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <Button
             android:id="@+id/commitBtn"
             android:text="@string/commit"
@@ -126,4 +115,4 @@
             />
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

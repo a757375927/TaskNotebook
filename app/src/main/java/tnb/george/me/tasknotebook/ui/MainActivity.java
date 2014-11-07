@@ -128,4 +128,13 @@ public class MainActivity extends MenuDrawerActivity {
         return true;
     }
 
+    @Override
+    protected  void onActivityResult(int requestCode,int resultCode,Intent data){
+        if(requestCode == WNLActivity.TO_ADD_TASK){
+            Bundle bundle = data.getExtras();
+            String date = bundle.getString("DATE");
+            UIUtils.showLong(this,date);
+        }
+    }
+
 }

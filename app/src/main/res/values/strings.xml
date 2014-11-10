@@ -11,6 +11,7 @@
     <string name="clear">清空</string>
     <string name="datetimein">日期时间:</string>
     <string name="timein">时间:</string>
+    <string name="toTaskList">任务列表:</string>
     <string name="toWNL">万年历</string>
     <string name="infoNotComplete">数据信息不完整</string>
     <string name="dataTypeNotAvailable">数据类型不匹配</string>

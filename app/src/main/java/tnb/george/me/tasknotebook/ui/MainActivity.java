@@ -30,8 +30,10 @@ import tnb.george.me.tasknotebook.utils.UIUtils;
 public class MainActivity extends MenuDrawerActivity {
 
     private final String LOG_TAG = "MAINACTIVITY";
-    Button commitBtn;
-    Button toWNLBtn;
+    protected Button commitBtn;
+    protected Button toWNLBtn;
+    protected Button toTaskListBtn;
+
     EditText datetimeTxt;
     EditText taskInfoTxt;
     EditText dateinTxt;
@@ -67,12 +69,15 @@ public class MainActivity extends MenuDrawerActivity {
         menuDrawer.setContentView(R.layout.activity_main);
         commitBtn = (Button)findViewById(R.id.commitBtn);
         toWNLBtn = (Button)findViewById(R.id.toWNLBtn);
+        toTaskListBtn = (Button)findViewById(R.id.toTaskListBtn);
         datetimeTxt = (EditText)findViewById(R.id.dateTimeTxt);
         taskInfoTxt = (EditText)findViewById(R.id.taskInfoTxt);
         dateinTxt = (EditText)findViewById(R.id.dateinTxt);
         timeinTxt = (EditText)findViewById(R.id.timeinTxt);
+        //绑定事件
         commitBtn.setOnClickListener(commitListener);
         toWNLBtn.setOnClickListener(toWNLListener);
+        toTaskListBtn.setOnClickListener(toTaskListListener);
 
     }
     /**
@@ -117,6 +122,17 @@ public class MainActivity extends MenuDrawerActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MainActivity.this,WNLActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    /**
+     * 到万年历activity的点击事件
+     */
+    View.OnClickListener toTaskListListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MainActivity.this,TaskListActivity.class);
             startActivity(intent);
         }
     };

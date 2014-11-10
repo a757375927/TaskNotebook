@@ -3,15 +3,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".MyActivity"
-    android:background="@color/white" >
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical" >
-      <include layout="@layout/mainbar" />
-  </LinearLayout>
+    tools:context=".MyActivity">
+    <!--
+    android:background="@color/white"
+    -->
+    <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical" >
+            <include layout="@layout/mainbar" />
+     </LinearLayout>
 
    <RelativeLayout
         android:id="@+id/txtlay1"
@@ -108,7 +109,8 @@
             android:layout_height="50dp"
             />
         <Button
-            android:text="@string/clear"
+            android:id="@+id/toTaskListBtn"
+            android:text="@string/toTaskList"
             android:layout_toRightOf="@id/toWNLBtn"
             android:layout_width="80dp"
             android:layout_height="50dp"

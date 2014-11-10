@@ -7,17 +7,23 @@ import java.util.Date;
  */
 public class Task {
 
-    public Task(String name,String taskInfo,Date createDate,Date taskDate){
+    public static final String ID = "id";
+    public static final String NAME = "name";
+    public static final String TASKINFO = "taskInfo";
+    public static final String CREATEDATE = "createDate";
+    public static final String TASKDATE = "taskDate";
+
+    public Task(String name,String taskInfo,Date createTime,Date taskDate){
         this.setName(name);
         this.setTaskInfo(taskInfo);
-        this.setCreateDate(createDate);
-        this.setTaskDate(taskDate);
+        this.setCreateTime(createTime);
+        this.setTaskTime(taskTime);
     }
 
     private int id;
     private String name;
-    private Date createDate;
-    private Date taskDate;
+    private Date createTime;
+    private Date taskTime;
     private String taskInfo;
 
     public int getId() {
@@ -36,20 +42,20 @@ public class Task {
         this.name = name;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getTaskDate() {
-        return taskDate;
+    public Date getTaskTime() {
+        return taskTime;
     }
 
-    public void setTaskDate(Date taskDate) {
-        this.taskDate = taskDate;
+    public void setTaskTime(Date taskTime) {
+        this.taskTime = taskTime;
     }
 
     public String getTaskInfo() {

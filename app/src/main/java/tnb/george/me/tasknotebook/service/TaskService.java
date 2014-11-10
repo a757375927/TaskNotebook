@@ -31,8 +31,8 @@ public class TaskService {
         ContentValues values = new ContentValues();
         values.put("name",task.getName());
         values.put("taskInfo",task.getTaskInfo());
-        values.put("taskDate",task.getTaskDate().getTime());
-        values.put("createDate",task.getCreateDate().getTime());
+        values.put("taskTime",task.getTaskTime().getTime());
+        values.put("createTime",task.getCreateTime().getTime());
         utils.insert(values);
     }
 

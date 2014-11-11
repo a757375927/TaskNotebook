@@ -35,24 +35,24 @@ public class TaskListActivity extends MenuDrawerActivity{
     protected ListView taskListView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate( Bundle savedInstanceState ) {
+        super.onCreate( savedInstanceState );
 
         this.setTitle("任务列表");
-        final DBUtils utils = new DBUtils(this);
+        final DBUtils utils = new DBUtils( this );
         Cursor c = utils.query();
-        while(c.moveToNext()){
-            int id = c.getColumnIndex(Task.ID);
+        while( c.moveToNext() ){
+            int id = c.getColumnIndex( Task.ID );
            // c.getString(Task.CREATEDATE);
-            c.getColumnIndex(Task.TASKDATE);
-            c.getColumnIndex(Task.TASKINFO);
+            c.getColumnIndex( Task.TASKDATE );
+            c.getColumnIndex( Task.TASKINFO );
 
         }
-        String[] from = {Task.ID,Task.CREATEDATE,Task.TASKDATE,Task.TASKINFO};
-        int[] to = {R.id.task_list_item_id,R.id.task_list_item_createTime,R.id.task_list_item_taskTime,R.id.task_list_item_taskInfo};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.task_list_row_item,c,from,to);
-        taskListView = (ListView)findViewById(R.id.task_list_listview);
-        taskListView.setAdapter(adapter);
+        String[] from = { Task.ID,Task.TASKDATE,Task.TASKINFO };
+        int[] to = { R.id.task_list_item_id,R.id.task_list_item_taskTime,R.id.task_list_item_taskInfo };
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter( this,R.layout.task_list_row_item,c,from,to );
+        taskListView = ( ListView )findViewById( R.id.task_list_listview );
+        taskListView.setAdapter( adapter );
 
     }
 

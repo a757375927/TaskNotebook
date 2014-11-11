@@ -9,6 +9,14 @@
         android:layout_width="wrap_content"
         android:id="@+id/task_list_item_taskIcon" android:layout_height="fill_parent">
     </ImageView>
+
+    <TextView
+        android:text="taskinfo"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:visibility="invisible"
+        android:id="@+id/task_list_item_id"/>
+
     <TextView
         android:text="taskinfo"
         android:layout_height="wrap_content"
@@ -21,6 +29,8 @@
         android:layout_width="fill_parent"
         android:id="@+id/task_list_item_taskInfo" android:layout_toRightOf="@+id/task_list_item_taskIcon" android:layout_below="@+id/task_list_item_taskTime">
     </TextView>
+
+
 </RelativeLayout>
 <!--
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

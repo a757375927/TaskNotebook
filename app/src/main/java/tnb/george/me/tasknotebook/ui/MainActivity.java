@@ -112,6 +112,8 @@ public class MainActivity extends MenuDrawerActivity {
                 UIUtils.showLong(MainActivity.this,"ERROR:" + ex.getMessage());
                 Log.i("TaskNotebook-->", "exception MainAct(88):" + ex.getMessage());
             }
+
+            
         }
     };
 

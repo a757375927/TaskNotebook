@@ -20,6 +20,7 @@ public class DBUtils extends SQLiteOpenHelper{
             " _id integer primary key autoincrement," +
             " taskInfo text," +
             " createTime integer," +
+            " name text," +
             " taskTime integer)";
 
     private SQLiteDatabase db;

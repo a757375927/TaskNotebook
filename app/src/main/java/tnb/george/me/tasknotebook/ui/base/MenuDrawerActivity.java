@@ -17,7 +17,6 @@ import tnb.george.me.tasknotebook.R;
 import tnb.george.me.tasknotebook.adapter.MenuAdapter;
 import tnb.george.me.tasknotebook.bean.MenuCategory;
 import tnb.george.me.tasknotebook.bean.MenuItem;
-import tnb.george.me.tasknotebook.utils.UIUtils;
 
 /**
  * Created by GeorgeZou on 2014/11/5.\
@@ -60,7 +59,6 @@ public abstract class MenuDrawerActivity extends Activity implements MenuAdapter
         items.add(new MenuItem("关于",R.drawable.menu_about));
         items.add(new MenuCategory(" "));
         items.add(new MenuItem("退出",R.drawable.menu_exit));
-        UIUtils.showLong(this,"initMenuDrawer size:" + items.size());
 
         listView = new ListView(this);
         menuAdapter = new MenuAdapter(this,items);

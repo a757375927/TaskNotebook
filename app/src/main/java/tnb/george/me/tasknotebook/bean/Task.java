@@ -13,7 +13,11 @@ public class Task {
     public static final String CREATEDATE = "createDate";
     public static final String TASKDATE = "taskDate";
 
-    public Task(String name,String taskInfo,Date createTime,Date taskDate){
+    public Task(Date taskTime,String taskInfo){
+        this.setTaskInfo(taskInfo);
+        this.setTaskTime(taskTime);
+    }
+    public Task(String name,String taskInfo,Date createTime,Date taskTime){
         this.setName(name);
         this.setTaskInfo(taskInfo);
         this.setCreateTime(createTime);

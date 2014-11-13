@@ -1,25 +1,33 @@
 package tnb.george.me.tasknotebook.ui;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.database.Cursor;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import tnb.george.me.tasknotebook.R;
 import tnb.george.me.tasknotebook.bean.MenuItem;
 import tnb.george.me.tasknotebook.bean.Task;
+import tnb.george.me.tasknotebook.service.TaskService;
 import tnb.george.me.tasknotebook.ui.base.MenuDrawerActivity;
 import tnb.george.me.tasknotebook.utils.DBUtils;
+import tnb.george.me.tasknotebook.utils.UIUtils;
 
 /**
  * Created by GeorgeZou on 2014/11/10.\
@@ -30,30 +38,14 @@ import tnb.george.me.tasknotebook.utils.DBUtils;
  */
 public class TaskListActivity extends MenuDrawerActivity{
 
-    private String LOG_TAG = "";
+    private String LOG_TAG = "TASK_LIST_ACTIVITY";
 
     protected ListView taskListView;
-
+    protected TaskService taskService = new TaskService(this);
+    protected MyTaskListAdapter myTaskListAdapter;
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-
-        this.setTitle("任务列表");
-        final DBUtils utils = new DBUtils( this );
-        Cursor c = utils.query();
-        while( c.moveToNext() ){
-            int id = c.getColumnIndex( Task.ID );
-           // c.getString(Task.CREATEDATE);
-            c.getColumnIndex( Task.TASKDATE );
-            c.getColumnIndex( Task.TASKINFO );
-
-        }
-        String[] from = { Task.ID,Task.TASKDATE,Task.TASKINFO };
-        int[] to = { R.id.task_list_item_id,R.id.task_list_item_taskTime,R.id.task_list_item_taskInfo };
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter( this,R.layout.task_list_row_item,c,from,to );
-        taskListView = ( ListView )findViewById( R.id.task_list_listview );
-        taskListView.setAdapter( adapter );
-
     }
 
     @Override
@@ -61,6 +53,12 @@ public class TaskListActivity extends MenuDrawerActivity{
         super.onStart();
         //菜单
         menuDrawer.setContentView(R.layout.activity_task_list);
+        this.setTitle("任务列表");
+
+        List<Task> myTask = taskService.getTaskList();
+        myTaskListAdapter = new MyTaskListAdapter(this,myTask);
+        taskListView = ( ListView )findViewById( R.id.task_list_listview );
+        taskListView.setAdapter( myTaskListAdapter );
     }
 
 
@@ -69,54 +67,68 @@ public class TaskListActivity extends MenuDrawerActivity{
 
     }
 
+    public class MyTaskListAdapter extends BaseAdapter{
 
-    public class TaskListAdapter extends BaseAdapter {
+        Context mContext;
+        List<Task> mTask;
 
-        View[] itemsViews;
+        public MyTaskListAdapter(Context context,List<Task> task) {
+            super();
+            mContext = context;
+            mTask = task;
+        }
 
-        public TaskListAdapter(List<Task> items){
-            itemsViews = new View[items.size()];
-            for(int i = 0;i<items.size();i++){
-                itemsViews[i] = makeItemView(items.get(i));
+        private int[] colors = new int[]{ 0xff626569, 0xff4f5257 };
+
+        public View getView(final int position,View convertView,ViewGroup parent) {
+            ImageView image = null;
+            TextView title = null;
+            TextView text = null;
+            Button button = null;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(mContext).inflate(
+                        R.layout.task_list_item, null
+                );
+                image = (ImageView) convertView.findViewById(R.id.array_image);
+                title = (TextView) convertView.findViewById(R.id.array_title);
+                text = (TextView) convertView.findViewById(R.id.array_text);
+                button = (Button) convertView.findViewById(R.id.array_button);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        UIUtils.showLong(TaskListActivity.this, "您点击的第" + position + "个按钮");
+
+                    }
+                });
+
             }
-        }
-
-        public View makeItemView(Task task) {
-            LayoutInflater inflater = (LayoutInflater) TaskListActivity.this
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View itemView = inflater.inflate(R.layout.task_list_row_item,null);
-
-            TextView title = (TextView) itemView.findViewById(R.id.task_list_item_taskInfo);
-            title.setText(task.getTaskInfo());
-            TextView text = (TextView) itemView.findViewById(R.id.task_list_item_taskTime);
-            text.setText(task.getTaskTime().toString());
-            ImageView image = (ImageView) itemView.findViewById(R.id.task_list_item_taskIcon);
-            image.setImageResource(R.drawable.actionbar_add_icon);
-
-            return itemView;
-        }
-
-
-        @Override
-        public int getCount() {
-            return 0;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null)
-                return itemsViews[position];
+            int colorPos = position % colors.length;
+            convertView.setBackgroundColor(colors[colorPos]);
+            title.setText(mTask.get(position).getTaskTime().toString());
+            text.setText(mTask.get(position).getTaskInfo());
+            if(colorPos == 0)
+                image.setImageResource(R.drawable.actionbar_add_icon);
+            else
+                image.setImageResource(R.drawable.actionbar_more_icon);
             return convertView;
+
+        }
+
+        public int getCount() {
+            return mTask.size();
+        }
+
+        @Override
+        public boolean areAllItemsEnabled() {
+            return false;
+        }
+
+        public Object getItem(int position) {
+            return position;
+        }
+
+        public long getItemId(int position) {
+            return position;
         }
     }
 

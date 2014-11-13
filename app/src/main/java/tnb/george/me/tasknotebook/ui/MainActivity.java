@@ -94,29 +94,26 @@ public class MainActivity extends MenuDrawerActivity {
                 UIUtils.showLong(MainActivity.this,getString(R.string.infoNotComplete));
             }
 
-            Toast.makeText(MainActivity.this, "datetime:"+datetime+" taskInfo:"+taskInfo, Toast.LENGTH_LONG).show();
-
             Date dateNew = null;
             try {
                 dateNew = StringUtils.stringToDate(datetime);
-            }catch(ParseException ex){
-                UIUtils.showLong(MainActivity.this,getString(R.string.dataTypeNotAvailable));
+            }catch(Exception ex){
+                ex.printStackTrace();
             }
-            Toast.makeText(MainActivity.this, "commit Listener ", Toast.LENGTH_LONG).show();
             Task task = new Task("1",taskInfo,new Date(),dateNew);
-            UIUtils.showLong(MainActivity.this,"准备添加内容:"+dateNew.toString()+" "+taskInfo);
 
-            try {
-                taskService.save(task);
-            }catch(Exception ex) {
-                UIUtils.showLong(MainActivity.this,"ERROR:" + ex.getMessage());
-                Log.i("TaskNotebook-->", "exception MainAct(88):" + ex.getMessage());
-            }
+            taskService.save(task);
 
-            
+            UIUtils.showLong(MainActivity.this,getString(R.string.add_success));
+            toTaskListActivity();
         }
     };
 
+
+    protected void toTaskListActivity(){
+        Intent intent = new Intent(MainActivity.this,TaskListActivity.class);
+        startActivity(intent);
+    }
     /**
      * 到万年历activity的点击事件
      */
@@ -134,8 +131,7 @@ public class MainActivity extends MenuDrawerActivity {
     View.OnClickListener toTaskListListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(MainActivity.this,TaskListActivity.class);
-            startActivity(intent);
+            toTaskListActivity();
         }
     };
 

@@ -4,8 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="tnb.george.me.tasknotebook.ui.TaskListActivity">
-
-    <include layout="@layout/mainbar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <include layout="@layout/mainbar" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/task_list_listview"

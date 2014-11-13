@@ -21,6 +21,9 @@
     <string name="reallyWantToDelete">真的要删除该任务吗??</string>
     <string name="title_activity_my">MyActivity</string>
 
+    <string name="add_success">添加成功</string>
+
+
 
     <!-- 顶栏按钮 -->
     <string name="head_bar_more">更多</string>

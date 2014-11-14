@@ -21,37 +21,41 @@
         android:text="taskinfo"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:id="@+id/task_list_item_taskTime" android:layout_toRightOf="@+id/task_list_item_taskIcon" android:textSize="20dip">
-    </TextView>
+        android:id="@+id/task_list_item_taskTime"
+        android:layout_toRightOf="@+id/task_list_item_taskIcon" android:textSize="20dip"/>
+
     <TextView
         android:text="info"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:id="@+id/task_list_item_taskInfo" android:layout_toRightOf="@+id/task_list_item_taskIcon" android:layout_below="@+id/task_list_item_taskTime">
-    </TextView>
+        android:id="@+id/task_list_item_taskInfo"
+        android:layout_toRightOf="@+id/task_list_item_taskIcon"
+        android:layout_below="@+id/task_list_item_taskTime"/>
+
 
 
 </RelativeLayout>
-<!--
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/task_list_item_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/task_list_item_taskTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/task_list_item_createTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/task_list_item_taskInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
-    -->
+
+    <!--
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/task_list_item_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/task_list_item_taskTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/task_list_item_createTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/task_list_item_taskInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+        -->

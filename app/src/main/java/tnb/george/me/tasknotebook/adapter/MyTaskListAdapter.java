@@ -1,6 +1,7 @@
 package tnb.george.me.tasknotebook.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +36,13 @@ public class MyTaskListAdapter extends BaseAdapter {
     }
 
     private int[] colors = new int[]{ 0xff626569, 0xff4f5257 };
+    //private int[] colors = new int[]{ #e9e9e9, 0xff4f5257 };
 
     public View getView(final int position,View convertView,ViewGroup parent) {
         ImageView image = null;
         TextView title = null;
         TextView text = null;
-        Button button = null;
+        //Button button = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(
                     R.layout.task_list_item, null
@@ -48,22 +50,24 @@ public class MyTaskListAdapter extends BaseAdapter {
             image = (ImageView) convertView.findViewById(R.id.array_image);
             title = (TextView) convertView.findViewById(R.id.array_title);
             text = (TextView) convertView.findViewById(R.id.array_text);
-            button = (Button) convertView.findViewById(R.id.array_button);
+            /*button = (Button) convertView.findViewById(R.id.array_button);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
                     UIUtils.showLong(mContext, "您点击的第" + position + "个按钮");
 
                 }
-            });
+            });*/
             int colorPos = position % colors.length;
-            convertView.setBackgroundColor(colors[colorPos]);
+           //String a = "E9E9E9";
+
+            convertView.setBackgroundColor(Color.parseColor("#E9E9E9"));
             title.setText(mTask.get(position).getTaskTime().toString());
             text.setText(mTask.get(position).getTaskInfo());
             if(colorPos == 0)
-                image.setImageResource(R.drawable.actionbar_add_icon);
+                image.setImageResource(R.drawable.image01);
             else
-                image.setImageResource(R.drawable.actionbar_more_icon);
+                image.setImageResource(R.drawable.image02);
 
         }
         return convertView;

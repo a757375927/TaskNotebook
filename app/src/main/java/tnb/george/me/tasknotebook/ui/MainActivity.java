@@ -57,11 +57,6 @@ public class MainActivity extends MenuDrawerActivity {
         initView();
     }
 
-    @Override
-    protected void onMenuItemClicked(int position, MenuItem item) {
-        UIUtils.showLong(this,"on click menu item:"+item.mTitle);
-    }
-
     /**
      * 绑定控件
      */

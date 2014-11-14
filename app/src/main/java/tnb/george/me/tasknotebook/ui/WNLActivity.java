@@ -89,9 +89,4 @@ public class WNLActivity extends MenuDrawerActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onMenuItemClicked(int position, tnb.george.me.tasknotebook.bean.MenuItem item) {
-
-    }
-
 }

@@ -6,6 +6,10 @@
     <color name="full_transparent">#00000000</color>
     <color name="half_transparent">#aa000000</color>
 
+    <!-- noboringactionbar -->
+    <color name="actionbar_main">#63C3FF</color>
+    <color name="actionbar_title_color">@android:color/white</color>
+
     <color name="white">#FFFFFF</color><!--白色 -->
     <color name="ivory">#FFFFF0</color><!--象牙色 -->
     <color name="lightyellow">#FFFFE0</color><!--亮黄色 -->

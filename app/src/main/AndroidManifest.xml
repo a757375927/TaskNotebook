@@ -26,5 +26,9 @@
             android:theme="@android:style/Theme.Holo.NoActionBar"
             android:name=".ui.TaskListActivity"
             android:label="@string/title_activity_my_activity2" />
+
+        <activity
+            android:name=".ui.notboringactionbar.NoBoringActionBarActivity"
+            android:label="@string/title_activity_my_activity2" />
     </application>
 </manifest>

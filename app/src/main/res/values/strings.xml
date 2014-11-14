@@ -23,7 +23,7 @@
 
     <string name="add_success">添加成功</string>
 
-
+    <string name="noboringactionbar_title">记事本</string>
 
     <!-- 顶栏按钮 -->
     <string name="head_bar_more">更多</string>

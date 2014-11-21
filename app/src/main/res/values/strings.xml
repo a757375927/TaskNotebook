@@ -29,4 +29,12 @@
     <string name="head_bar_more">更多</string>
     <string name="head_bar_add">添加</string>
     <string name="head_bar_search">搜索</string>
+
+    <string name="please_input_task_name">请输入任务名</string>
+    <string name="please_input_task_info">请输入任务详情</string>
+    <string name="please_input_task_local">请输入地址</string>
+    <string name="please_input_task_date">请输入开始时间</string>
+
+
+
 </resources>

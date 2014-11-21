@@ -57,4 +57,17 @@
     </style>
     <!--  -->
 
+    <style name="TNBControl"></style>
+    <style name="TNBControl.EditText">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:layout_height">36dip</item>
+        <item name="android:background">@drawable/bg_edittext</item>
+        <item name="android:padding">5dip</item>
+        <item name="android:layout_margin">36dip</item>
+        <item name="android:textColorHint">#AAAAAA</item>
+        <item name="android:textSize">15dip</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_width">fill_parent</item>
+    </style>
+
 </resources>

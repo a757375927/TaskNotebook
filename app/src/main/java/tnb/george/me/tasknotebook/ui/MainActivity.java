@@ -36,8 +36,8 @@ public class MainActivity extends MenuDrawerActivity {
 
     EditText datetimeTxt;
     EditText taskInfoTxt;
-    EditText dateinTxt;
-    EditText timeinTxt;
+    //EditText dateinTxt;
+    //EditText timeinTxt;
 
     TaskService taskService = new TaskService(this);
 
@@ -67,8 +67,8 @@ public class MainActivity extends MenuDrawerActivity {
         toTaskListBtn = (Button)findViewById(R.id.toTaskListBtn);
         datetimeTxt = (EditText)findViewById(R.id.dateTimeTxt);
         taskInfoTxt = (EditText)findViewById(R.id.taskInfoTxt);
-        dateinTxt = (EditText)findViewById(R.id.dateinTxt);
-        timeinTxt = (EditText)findViewById(R.id.timeinTxt);
+        //dateinTxt = (EditText)findViewById(R.id.dateinTxt);
+        //timeinTxt = (EditText)findViewById(R.id.timeinTxt);
         //绑定事件
         commitBtn.setOnClickListener(commitListener);
         toWNLBtn.setOnClickListener(toWNLListener);

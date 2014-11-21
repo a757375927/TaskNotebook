@@ -50,20 +50,12 @@ public class MyTaskListAdapter extends BaseAdapter {
             image = (ImageView) convertView.findViewById(R.id.array_image);
             title = (TextView) convertView.findViewById(R.id.array_title);
             text = (TextView) convertView.findViewById(R.id.array_text);
-            /*button = (Button) convertView.findViewById(R.id.array_button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View arg0) {
-                    UIUtils.showLong(mContext, "您点击的第" + position + "个按钮");
-
-                }
-            });*/
             int colorPos = position % colors.length;
-           //String a = "E9E9E9";
 
             convertView.setBackgroundColor(Color.parseColor("#E9E9E9"));
             title.setText(mTask.get(position).getTaskTime().toString());
             text.setText(mTask.get(position).getTaskInfo());
+
             if(colorPos == 0)
                 image.setImageResource(R.drawable.image01);
             else

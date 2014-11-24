@@ -1,15 +1,23 @@
 package tnb.george.me.tasknotebook.ui;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 import tnb.george.me.tasknotebook.R;
@@ -27,7 +35,7 @@ import tnb.george.me.tasknotebook.utils.UIUtils;
  * @Author:GeorgeZou(Zousongqi0213@gmail.com)<br/>
  * @Since:2014/10/29<br/>
  */
-public class MainActivity extends MenuDrawerActivity {
+public class MainActivity extends MenuDrawerActivity implements View.OnTouchListener {
 
     private final String LOG_TAG = "MAINACTIVITY";
     protected Button commitBtn;
@@ -36,8 +44,8 @@ public class MainActivity extends MenuDrawerActivity {
 
     EditText datetimeTxt;
     EditText taskInfoTxt;
-    //EditText dateinTxt;
-    //EditText timeinTxt;
+    EditText beginDateTxt;
+    EditText endDateTxt;
 
     TaskService taskService = new TaskService(this);
 
@@ -45,8 +53,6 @@ public class MainActivity extends MenuDrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.i(LOG_TAG,"COME INTO onCreate function");
 
     }
 
@@ -67,8 +73,13 @@ public class MainActivity extends MenuDrawerActivity {
         toTaskListBtn = (Button)findViewById(R.id.toTaskListBtn);
         datetimeTxt = (EditText)findViewById(R.id.dateTimeTxt);
         taskInfoTxt = (EditText)findViewById(R.id.taskInfoTxt);
-        //dateinTxt = (EditText)findViewById(R.id.dateinTxt);
-        //timeinTxt = (EditText)findViewById(R.id.timeinTxt);
+
+        beginDateTxt = (EditText)this.findViewById(R.id.beginDateTimeTxt);
+        endDateTxt = (EditText)this.findViewById(R.id.endDateTimeTxt);
+
+        beginDateTxt.setOnTouchListener(this);
+        endDateTxt.setOnTouchListener(this);
+
         //绑定事件
         commitBtn.setOnClickListener(commitListener);
         toWNLBtn.setOnClickListener(toWNLListener);
@@ -146,4 +157,77 @@ public class MainActivity extends MenuDrawerActivity {
         }
     }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View viewDateTimeDelog = View.inflate(this,R.layout.date_time_delog,null);
+            final DatePicker datePicker = (DatePicker)viewDateTimeDelog.findViewById(R.id.date_picker);
+            final TimePicker timePicker = (TimePicker)viewDateTimeDelog.findViewById(R.id.time_picker);
+            builder.setView(viewDateTimeDelog);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            datePicker.init(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH),null);
+
+            timePicker.setIs24HourView(true);
+            timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
+            timePicker.setCurrentMinute(Calendar.MINUTE);
+
+            if(view.getId() == R.id.beginDateTimeTxt){
+                final int inType = beginDateTxt.getInputType();
+                beginDateTxt.setInputType(InputType.TYPE_NULL);
+                beginDateTxt.onTouchEvent(motionEvent);
+                beginDateTxt.setInputType(inType);
+                beginDateTxt.setSelection(beginDateTxt.getText().length());
+
+                builder.setTitle("选择起始时间");
+                builder.setPositiveButton("确定",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        StringBuffer sb = new StringBuffer();
+                        sb.append(String.format("%d-%02d-%02d",
+                                datePicker.getYear(),
+                                datePicker.getMonth() + 1,
+                                datePicker.getDayOfMonth()));
+                        sb.append("  ");
+                        sb.append(timePicker.getCurrentHour()).append(":")
+                                .append(timePicker.getCurrentMinute());
+                        beginDateTxt.setText(sb);
+                        endDateTxt.requestFocus();
+                    }
+                });
+            }else if(view.getId() == R.id.endDateTimeTxt){
+                int inType = endDateTxt.getInputType();
+                endDateTxt.setInputType(InputType.TYPE_NULL);
+                endDateTxt.onTouchEvent(motionEvent);
+                endDateTxt.setInputType(inType);
+                endDateTxt.setSelection(endDateTxt.getText().length());
+                builder.setTitle("选取结束时间");
+                builder.setPositiveButton("确  定", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        StringBuffer sb = new StringBuffer();
+                        sb.append(String.format("%d-%02d-%02d",
+                                datePicker.getYear(),
+                                datePicker.getMonth() + 1,
+                                datePicker.getDayOfMonth()));
+                        sb.append("  ");
+                        sb.append(timePicker.getCurrentHour())
+                                .append(":").append(timePicker.getCurrentMinute());
+                        endDateTxt.setText(sb);
+
+                        dialog.cancel();
+                    }
+                });
+
+            }
+            Dialog dialog = builder.create();
+            dialog.show();
+        }
+
+        return true;
+    }
 }

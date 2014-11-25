@@ -98,6 +98,7 @@ public class MainActivity extends MenuDrawerActivity implements View.OnTouchList
 
             if(StringUtils.isEmpty(datetime) || StringUtils.isEmpty(taskInfo)){
                 UIUtils.showLong(MainActivity.this,getString(R.string.infoNotComplete));
+
             }
 
             Date dateNew = null;

@@ -14,6 +14,8 @@ import java.util.Date;
  */
 public class StringUtils {
 
+    public final static String DATE_TIME_FORMATE = "yyyy-MM-dd hh:mm";
+
     public final static SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
 
     public static boolean isEmpty(String str){
@@ -24,9 +26,14 @@ public class StringUtils {
         return formatDate.parse(dateStr);
     }
 
-    public static Date stringToDate(String dateStr,String formatStr) throws ParseException{
-        DateFormat dd=new SimpleDateFormat(formatStr);
-        Date date= dd.parse(dateStr);
+    public static Date stringToDate(String dateStr,String formatStr){
+        DateFormat dd = new SimpleDateFormat(formatStr);
+        Date date = null;
+        try {
+            date = dd.parse(dateStr);
+        }catch(ParseException ex){
+            ex.printStackTrace();
+        }
         return date;
     }
     public static String dateConvertString(Date str){

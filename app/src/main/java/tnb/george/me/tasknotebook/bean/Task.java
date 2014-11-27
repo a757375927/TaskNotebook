@@ -7,28 +7,35 @@ import java.util.Date;
  */
 public class Task {
 
-    public static final String ID = "id";
+    public static final String ID = "_id";
     public static final String NAME = "name";
+    public static final String DESCRIPTION = "description";
+    public static final String LOCATION = "location";
     public static final String TASKINFO = "taskInfo";
+    public static final String BEGINDATE = "beginDate";
+    public static final String ENDDATE = "endDate";
     public static final String CREATEDATE = "createDate";
-    public static final String TASKDATE = "taskDate";
 
-    public Task(Date taskTime,String taskInfo){
-        this.setTaskInfo(taskInfo);
-        this.setTaskTime(taskTime);
-    }
-    public Task(String name,String taskInfo,Date createTime,Date taskTime){
+    public Task(){}
+
+    public Task(int id, String name,String location,String description,Date beginDate,Date endDate,Date createDate){
         this.setName(name);
-        this.setTaskInfo(taskInfo);
-        this.setCreateTime(createTime);
-        this.setTaskTime(taskTime);
+        this.setBeginDate(beginDate);
+        this.setDescription(description);
+        this.setEndDate(endDate);
+        this.setId(id);
+        this.setLocation(location);
+        this.setCreateDate(createDate);
     }
 
     private int id;
     private String name;
-    private Date createTime;
-    private Date taskTime;
-    private String taskInfo;
+    private String location;
+    private String description;
+    private Date beginDate;
+    private Date endDate;
+    private Date createDate;
+    private Contact contact;
 
     public int getId() {
         return id;
@@ -46,27 +53,51 @@ public class Task {
         this.name = name;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public String getLocation() {
+        return location;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public Date getTaskTime() {
-        return taskTime;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTaskTime(Date taskTime) {
-        this.taskTime = taskTime;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getTaskInfo() {
-        return taskInfo;
+    public Date getBeginDate() {
+        return beginDate;
     }
 
-    public void setTaskInfo(String taskInfo) {
-        this.taskInfo = taskInfo;
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }

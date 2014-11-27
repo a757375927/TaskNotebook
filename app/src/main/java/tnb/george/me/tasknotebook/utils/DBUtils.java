@@ -15,13 +15,16 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DBUtils extends SQLiteOpenHelper{
     private static final String DB_NAME = "TASKNOTEBOOK.db";
-    private static final String TBL_NAME = "TaskNote";
+
+   // public Task(int id, String name,String location,String description,Date beginDate,Date endDate,Date createDate){
     private static final String CREATE_TBL = "create table TaskNote("+
             " _id integer primary key autoincrement," +
-            " taskInfo text," +
-            " createTime integer," +
             " name text," +
-            " taskTime integer)";
+            " location text," +
+            " description text," +
+            " beginDate integer," +
+            " endDate integer," +
+            " createDate integer)";
 
     private SQLiteDatabase db;
     public DBUtils(Context c){
@@ -34,22 +37,22 @@ public class DBUtils extends SQLiteOpenHelper{
 
     }
 
-    public void insert(ContentValues values){
+    public void insert(ContentValues values,String tableName){
         SQLiteDatabase db = getWritableDatabase();
-        db.insert(TBL_NAME,null,values);
+        db.insert(tableName,null,values);
         db.close();
     }
 
-    public Cursor query(){
+    public Cursor query(String tableName){
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.query(TBL_NAME,null,null,null,null,null,null);
+        Cursor c = db.query(tableName,null,null,null,null,null,null);
         return c;
     }
 
-    public void del(int id){
+    public void del(int id,String tableName){
         if(db == null)
             db = getWritableDatabase();
-        db.delete(TBL_NAME," _id=? ",new String[]{String.valueOf(id)});
+        db.delete(tableName," _id=? ",new String[]{String.valueOf(id)});
     }
 
     public void close(){

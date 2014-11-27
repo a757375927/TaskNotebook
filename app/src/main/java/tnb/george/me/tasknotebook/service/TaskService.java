@@ -26,44 +26,42 @@ import tnb.george.me.tasknotebook.utils.UIUtils;
 public class TaskService {
 
     DBUtils utils;
+    public final static String TABLE_NAME = "TaskNote";
+
     public TaskService(Context c){
         utils = new DBUtils(c);
     }
 
     public void save(Task task){
         ContentValues values = new ContentValues();
-        values.put("name",task.getName());
-        values.put("taskInfo",task.getTaskInfo());
-        values.put("taskTime",task.getTaskTime().getTime());
-        values.put("createTime",task.getCreateTime().getTime());
-        utils.insert(values);
+        values.put(task.NAME,task.getName());
+        values.put(task.LOCATION,task.getLocation());
+        values.put(task.DESCRIPTION,task.getDescription());
+        values.put(task.BEGINDATE,task.getBeginDate().getTime());
+        values.put(task.ENDDATE,task.getEndDate().getTime());
+        values.put(task.CREATEDATE,task.getCreateDate().getTime());
+        utils.insert(values,TABLE_NAME);
     }
 
     public List<Task> getTaskList(){
         List<Task> res = new ArrayList<Task>();
-        Cursor c = utils.query();
-
-        res.add(new Task(new Date(),"aaa"));
+        Cursor c = utils.query("TaskNote");
         while( c.moveToNext() ){
             int id = c.getColumnIndex( Task.ID );
-            // c.getString(Task.CREATEDATE);
-            String taskInfo = c.getString( 2 );
-            Date taskTime = new Date(c.getLong(4));
-            res.add( new Task(taskTime,taskInfo));
+            String name = c.getString(1);
+            String location = c.getString(2);
+            String description = c.getString(3);
+            Date beginDate = new Date(c.getLong(4));
+            Date endDate = new Date(c.getLong(5));
+            Date createDate = new Date(c.getLong(6));
+            res.add( new Task(id,name,location,description,beginDate,endDate,createDate));
         }
 
-         /*
-        String[] from = { Task.ID,Task.TASKDATE,Task.TASKINFO };
-        int[] to = { R.id.task_list_item_id,R.id.task_list_item_taskTime,R.id.task_list_item_taskInfo };
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter( this,R.layout.task_list_row_item,c,from,to );
-        taskListView = ( ListView )findViewById( R.id.task_list_listview );
-        taskListView.setAdapter( adapter );
-        */
         return res;
     }
 
     public void delete(int id){
-
+        utils.del(id,TABLE_NAME);
     }
 
 

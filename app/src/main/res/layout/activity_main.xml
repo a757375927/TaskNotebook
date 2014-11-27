@@ -30,14 +30,20 @@
             android:hint="@string/please_chose_end_date"/>
 
         <EditText
-            android:id="@+id/dateTimeTxt"
+            android:id="@+id/nameTxt"
             style="@style/TNBControl.EditText"
-            android:hint="@string/please_input_task_name"/>
+            android:hint="@string/please_input_name"/>
 
         <EditText
-            android:id="@+id/taskInfoTxt"
+            android:id="@+id/descriptionTxt"
             style="@style/TNBControl.EditText"
-            android:hint="@string/please_input_task_name"
+            android:hint="@string/please_input_description_name"
+            />
+
+        <EditText
+            android:id="@+id/locationTxt"
+            style="@style/TNBControl.EditText"
+            android:hint="@string/please_input_location_name"
             />
 
         <EditText

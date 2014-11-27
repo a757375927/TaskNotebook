@@ -38,12 +38,17 @@ import tnb.george.me.tasknotebook.utils.UIUtils;
 public class MainActivity extends MenuDrawerActivity implements View.OnTouchListener {
 
     private final String LOG_TAG = "MAINACTIVITY";
+
     protected Button commitBtn;
     protected Button toWNLBtn;
     protected Button toTaskListBtn;
 
     EditText datetimeTxt;
     EditText taskInfoTxt;
+    EditText nameTxt;
+    EditText locationTxt;
+    EditText descriptionTxt;
+
     EditText beginDateTxt;
     EditText endDateTxt;
 
@@ -71,11 +76,14 @@ public class MainActivity extends MenuDrawerActivity implements View.OnTouchList
         commitBtn = (Button)findViewById(R.id.commitBtn);
         toWNLBtn = (Button)findViewById(R.id.toWNLBtn);
         toTaskListBtn = (Button)findViewById(R.id.toTaskListBtn);
-        datetimeTxt = (EditText)findViewById(R.id.dateTimeTxt);
-        taskInfoTxt = (EditText)findViewById(R.id.taskInfoTxt);
+
+        nameTxt = (EditText)findViewById(R.id.nameTxt);
+        descriptionTxt = (EditText)findViewById(R.id.descriptionTxt);
+        locationTxt = (EditText)findViewById(R.id.locationTxt);
 
         beginDateTxt = (EditText)this.findViewById(R.id.beginDateTimeTxt);
         endDateTxt = (EditText)this.findViewById(R.id.endDateTimeTxt);
+
 
         beginDateTxt.setOnTouchListener(this);
         endDateTxt.setOnTouchListener(this);
@@ -93,21 +101,21 @@ public class MainActivity extends MenuDrawerActivity implements View.OnTouchList
 
         @Override
         public void onClick(View view) {
-            String datetime = datetimeTxt.getText().toString();
-            String taskInfo = taskInfoTxt.getText().toString();
+            String beginDateStr = beginDateTxt.getText().toString();
+            String endDateStr = endDateTxt.getText().toString();
+            String description = descriptionTxt.getText().toString();
+            String location = locationTxt.getText().toString();
+            String name =nameTxt.getText().toString();
 
-            if(StringUtils.isEmpty(datetime) || StringUtils.isEmpty(taskInfo)){
+            if(StringUtils.isEmpty(beginDateStr) || StringUtils.isEmpty(endDateStr)){
                 UIUtils.showLong(MainActivity.this,getString(R.string.infoNotComplete));
-
+                return;
             }
 
-            Date dateNew = null;
-            try {
-                dateNew = StringUtils.stringToDate(datetime);
-            }catch(Exception ex){
-                ex.printStackTrace();
-            }
-            Task task = new Task("1",taskInfo,new Date(),dateNew);
+            Date beginDate = StringUtils.stringToDate(beginDateStr,StringUtils.DATE_TIME_FORMATE);
+            Date endDate = StringUtils.stringToDate(endDateStr,StringUtils.DATE_TIME_FORMATE);
+
+            Task task = new Task(0,name,location,description,beginDate,endDate,new Date());
 
             taskService.save(task);
 
@@ -158,6 +166,12 @@ public class MainActivity extends MenuDrawerActivity implements View.OnTouchList
         }
     }
 
+    /**
+     * 日期时间EditView 选择框点击事件
+     * @param view
+     * @param motionEvent
+     * @return
+     */
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
@@ -199,6 +213,8 @@ public class MainActivity extends MenuDrawerActivity implements View.OnTouchList
                     }
                 });
             }else if(view.getId() == R.id.endDateTimeTxt){
+                final Date beginDate = StringUtils.stringToDate(beginDateTxt.getText().toString(), StringUtils.DATE_TIME_FORMATE);
+
                 int inType = endDateTxt.getInputType();
                 endDateTxt.setInputType(InputType.TYPE_NULL);
                 endDateTxt.onTouchEvent(motionEvent);
@@ -218,9 +234,14 @@ public class MainActivity extends MenuDrawerActivity implements View.OnTouchList
                         sb.append("  ");
                         sb.append(timePicker.getCurrentHour())
                                 .append(":").append(timePicker.getCurrentMinute());
-                        endDateTxt.setText(sb);
 
-                        dialog.cancel();
+                        Date endDate = StringUtils.stringToDate(sb.toString(), StringUtils.DATE_TIME_FORMATE);
+                        if(endDate.getTime() < beginDate.getTime()){
+                            UIUtils.showLong(MainActivity.this,"结束时间不能早于开始时间");
+                        }else{
+                            endDateTxt.setText(sb);
+                            dialog.cancel();
+                        }
                     }
                 });
 

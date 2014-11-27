@@ -53,8 +53,8 @@ public class MyTaskListAdapter extends BaseAdapter {
             int colorPos = position % colors.length;
 
             convertView.setBackgroundColor(Color.parseColor("#E9E9E9"));
-            title.setText(mTask.get(position).getTaskTime().toString());
-            text.setText(mTask.get(position).getTaskInfo());
+            title.setText(mTask.get(position).getName().toString());
+            text.setText(mTask.get(position).getDescription());
 
             if(colorPos == 0)
                 image.setImageResource(R.drawable.image01);

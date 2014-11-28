@@ -1,6 +1,7 @@
 package tnb.george.me.tasknotebook.ui;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
+import me.drakeet.materialdialog.MaterialDialog;
 import tnb.george.me.tasknotebook.R;
 import tnb.george.me.tasknotebook.bean.MenuItem;
 import tnb.george.me.tasknotebook.bean.Task;
@@ -175,8 +177,92 @@ public class MainActivity extends MenuDrawerActivity implements View.OnTouchList
      */
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
+
+        //是否重复点击
+        if(UIUtils.isFastDoubleClick())
+            return false;
+        //ACTION_DOWN和ACTION_UP单点触摸屏幕，按下去和放开的操作；
         if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            View viewDateTimeDelog = View.inflate(this,R.layout.date_time_delog,null);
+            final DatePicker datePicker = (DatePicker)viewDateTimeDelog.findViewById(R.id.date_picker);
+            final TimePicker timePicker = (TimePicker)viewDateTimeDelog.findViewById(R.id.time_picker);
+
+            final MaterialDialog mMaterialDialog = new MaterialDialog(this).setContentView(viewDateTimeDelog);
+
+            mMaterialDialog  .setNegativeButton("取消", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mMaterialDialog.dismiss();
+
+                        }
+                    });
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            datePicker.init(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH),null);
+
+            timePicker.setIs24HourView(true);
+            timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
+            timePicker.setCurrentMinute(Calendar.MINUTE);
+
+            if(view.getId() == R.id.beginDateTimeTxt){
+                final int inType = beginDateTxt.getInputType();
+                beginDateTxt.setInputType(InputType.TYPE_NULL);
+                beginDateTxt.onTouchEvent(motionEvent);
+                beginDateTxt.setInputType(inType);
+                beginDateTxt.setSelection(beginDateTxt.getText().length());
+
+                mMaterialDialog.setPositiveButton("确认开始时间", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                StringBuffer sb = new StringBuffer();
+                                sb.append(String.format("%d-%02d-%02d",
+                                        datePicker.getYear(),
+                                        datePicker.getMonth() + 1,
+                                        datePicker.getDayOfMonth()));
+                                sb.append("  ");
+                                sb.append(timePicker.getCurrentHour()).append(":")
+                                        .append(timePicker.getCurrentMinute());
+                                beginDateTxt.setText(sb);
+                                endDateTxt.requestFocus();
+                                mMaterialDialog.dismiss();
+                            }
+                        });
+            }else if(view.getId() == R.id.endDateTimeTxt){
+                final Date beginDate = StringUtils.stringToDate(beginDateTxt.getText().toString(), StringUtils.DATE_TIME_FORMATE);
+
+                int inType = endDateTxt.getInputType();
+                endDateTxt.setInputType(InputType.TYPE_NULL);
+                endDateTxt.onTouchEvent(motionEvent);
+                endDateTxt.setInputType(inType);
+                endDateTxt.setSelection(endDateTxt.getText().length());
+
+                mMaterialDialog.setPositiveButton("确认开始时间", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        StringBuffer sb = new StringBuffer();
+                        sb.append(String.format("%d-%02d-%02d",
+                                datePicker.getYear(),
+                                datePicker.getMonth() + 1,
+                                datePicker.getDayOfMonth()));
+                        sb.append("  ");
+                        sb.append(timePicker.getCurrentHour())
+                                .append(":").append(timePicker.getCurrentMinute());
+
+                        Date endDate = StringUtils.stringToDate(sb.toString(), StringUtils.DATE_TIME_FORMATE);
+                        if(endDate.getTime() < beginDate.getTime()){
+                            UIUtils.showLong(MainActivity.this,"结束时间不能早于开始时间");
+                        }else{
+                            endDateTxt.setText(sb);
+                            mMaterialDialog.dismiss();
+                        }
+                    }
+                });
+            }
+            mMaterialDialog.show();
+
+            /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
             View viewDateTimeDelog = View.inflate(this,R.layout.date_time_delog,null);
             final DatePicker datePicker = (DatePicker)viewDateTimeDelog.findViewById(R.id.date_picker);
             final TimePicker timePicker = (TimePicker)viewDateTimeDelog.findViewById(R.id.time_picker);
@@ -248,7 +334,8 @@ public class MainActivity extends MenuDrawerActivity implements View.OnTouchList
 
             }
             Dialog dialog = builder.create();
-            dialog.show();
+            dialog.show();*/
+
         }
 
         return true;

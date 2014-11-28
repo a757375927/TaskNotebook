@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
+    android:background="@drawable/bg_black"
     android:padding="10dip" >
 
     <TextView
@@ -15,8 +16,9 @@
 
     <DatePicker
         android:id="@+id/date_picker"
+        android:calendarViewShown="false"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_marginTop="5dip" />
 
     <TextView
@@ -31,7 +33,7 @@
     <TimePicker
         android:id="@+id/time_picker"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_marginTop="5dip" />
 
 </LinearLayout>

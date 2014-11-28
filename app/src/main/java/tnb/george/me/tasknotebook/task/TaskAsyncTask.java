@@ -19,6 +19,23 @@ public class TaskAsyncTask extends AsyncTask{
 
     @Override
     protected Object doInBackground(Object[] objects) {
+
+        publishProgress();
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(Object o) {
+        super.onPostExecute(o);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onProgressUpdate(Object[] values) {
+        super.onProgressUpdate(values);
     }
 }

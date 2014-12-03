@@ -2,30 +2,22 @@ package tnb.george.me.tasknotebook.ui.notboringactionbar;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.TypefaceSpan;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import tnb.george.me.tasknotebook.R;
 import tnb.george.me.tasknotebook.adapter.MyTaskListAdapter;
-import tnb.george.me.tasknotebook.service.TaskService;
+import tnb.george.me.tasknotebook.biz.TaskBiz;
 
 public class NoBoringActionBarActivity extends Activity {
 
@@ -49,7 +41,7 @@ public class NoBoringActionBarActivity extends Activity {
 
     private TypedValue mTypedValue = new TypedValue();
 
-    private TaskService taskService =  new TaskService(this);
+    private TaskBiz taskBiz =  new TaskBiz(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +78,7 @@ public class NoBoringActionBarActivity extends Activity {
         mPlaceHolderView = getLayoutInflater().inflate(R.layout.view_header_placeholder, mListView, false);
         mListView.addHeaderView(mPlaceHolderView);
         //mListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, FAKES));
-        mListView.setAdapter(new MyTaskListAdapter(this,taskService.getTaskList()));
+        mListView.setAdapter(new MyTaskListAdapter(this, taskBiz.getTaskList()));
         mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {

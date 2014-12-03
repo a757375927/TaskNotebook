@@ -30,5 +30,16 @@
         <activity
             android:name=".ui.notboringactionbar.NoBoringActionBarActivity"
             android:label="@string/title_activity_my_activity2" />
+
+        <receiver android:name=".service.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </receiver>
+
     </application>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.receive_boot_completed"/>
 </manifest>
